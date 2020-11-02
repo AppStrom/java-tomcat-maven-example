@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example</groupId>
   <artifactId>java-tomcat-maven-example</artifactId>
@@ -25,7 +25,9 @@
         <executions>
           <execution>
             <phase>package</phase>
-            <goals><goal>copy</goal></goals>
+            <goals>
+              <goal>copy</goal>
+            </goals>
             <configuration>
               <artifactItems>
                 <artifactItem>
@@ -39,6 +41,36 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <name>releases</name>
+      <url>https://repo.wooc.app/repository/maven-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>snapshots</name>
+      <url>https://repo.wooc.app/repository/maven-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <properties>
+    <project.scm.id>appstrom-github</project.scm.id>
+  </properties>
+  <scm>
+    <connection>scm:git:git@github.com/AppStrom/java-tomcat-maven-example.git</connection>
+    <developerConnection>scm:git:git@github.com/AppStrom/java-tomcat-maven-example.git</developerConnection>
+    <url>git@github.com/AppStrom/java-tomcat-maven-example.git</url>
+    <tag>HEAD</tag>
+  </scm>
 </project>
